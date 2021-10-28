@@ -88,7 +88,7 @@ namespace ClaimsApi
                 app.UseHsts();
             }
 
-            
+      //      
             // Enable middleware to serve generated Swagger as a JSON end-point
             app.UseSwagger();
             // Enable middleware to serve Swagger-ui, specifying Swagger JSON end-point.
