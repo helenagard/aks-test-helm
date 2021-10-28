@@ -58,7 +58,7 @@ namespace ClaimsApi
                     {
                         Name = "Microsoft",
 			Email = "hagard@microsoft.com",
-                        Url = new Uri("https://github.com/ganrad/aks-aspnet-sqldb-rest")
+                        Url = new Uri("https://github.com/helenagard/aks-aspnet-sqldb-rest")
                     },
                     License = new OpenApiLicense
                     {
