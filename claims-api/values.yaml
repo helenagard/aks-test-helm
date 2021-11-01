@@ -34,8 +34,8 @@ ingress:
     kubernetes.io/ingress.class: nginx
   path: /
   host:
-    epProd: claims-api-prod.akslab.com
-    epStage: claims-api-stage.akslab.com
+    epProd: claims-api-prod.cluster.local
+    epStage: claims-api-stage.cluster.local
   hosts:
     - chart-example.local
   tls: []
