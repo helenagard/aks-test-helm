@@ -33,5 +33,5 @@ spec:
             backend:
              service:
                 name: {{ .Values.app.name }}-svc-stage
-                port: http
+                port: 80
 {{- end }}
