@@ -31,6 +31,6 @@ spec:
         paths:
           - path: {{ $ingressPath }}
             backend:
-              serviceName: {{ .Values.app.name }}-svc-stage
-              servicePort: http
+              name: {{ .Values.app.name }}-svc-stage
+              port: http
 {{- end }}
