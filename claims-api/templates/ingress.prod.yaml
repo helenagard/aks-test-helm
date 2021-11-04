@@ -30,6 +30,7 @@ spec:
       http:
         paths:
           - path: {{ $ingressPath }}
+            pathType: {{ .pathType }}
             backend:
              service:
                 name: {{ .Values.app.name }}-svc
