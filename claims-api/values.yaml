@@ -37,6 +37,7 @@ ingress:
     - claims-api.cluster.local  
     - host:
       epProd: claims-api-prod.cluster.local
+    - host:  
       epStage: claims-api-stage.cluster.local
       paths:
       - path: /
