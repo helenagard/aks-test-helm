@@ -4,7 +4,7 @@
 replicaCount: 1
 
 app:
-  name: claims-api-test
+  name: claims-api
   
 image:
   repository: akshag.azurecr.io/claims-api-test
