@@ -6,7 +6,6 @@ metadata:
   name: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
   labels:
     app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
-    chart: {{ template "claims-api.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
