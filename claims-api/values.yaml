@@ -36,13 +36,13 @@ ingress:
   hosts:
     - host: 
        epProd: claims-api-prod.akslab.com
-      paths:
+    - paths:
         - path: /
           pathType: Prefix
        
     - host: 
        epStage: claims-api-stage.akslab.com
-      paths:
+    - paths:
         - path: /
           pathType: Prefix
                     
