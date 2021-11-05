@@ -4,7 +4,7 @@
 replicaCount: 1
 
 image:
-  repository: akshag.azurecr.io/claims-api
+  repository: akshag.azurecr.io/claims-api-test
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -38,6 +38,19 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+deployment:
+  livenessProbe: /
+  readinessProbe: /
+  blue:
+    enabled: false
+    tag: latest
+  green:
+    enabled: false
+    tag: latest
+  envs:
+  - name: blue
+  - name: green
+
 service:
   type: ClusterIP
   port: 80
@@ -52,12 +65,12 @@ ingress:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 
   hosts:
-    - host: "claims-api.akslab.com"
+    - host: "claims-api-test.cluster.local"
       paths:
         - path: /
           pathType: Prefix
           env: prod
-    - host: "claims-api-stage.akslab.com"
+    - host: "claims-api-stage.cluster.local"
       paths:
         - path: /
           pathType: Prefix
