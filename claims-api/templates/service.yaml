@@ -1,20 +1,32 @@
+{{- range $index, $env := .Values.service.envs }}
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.app.name }}-svc
+  name: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
   labels:
-    app: {{ .Values.app.name }}
+    app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
     chart: {{ template "claims-api.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ $.Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ $.Values.service.port }}
       targetPort: http
       protocol: TCP
       name: http
   selector:
-    app: {{ .Values.app.name }}
-    slot: {{ .Values.productionSlot }}
-    release: {{ .Release.Name }}
+    app: "{{ include "claims-api-chart.fullname" $ }}-{{ $.Values.slot }}
+    {{- if eq .name "stage" }}
+      {{- if eq $.Values.productionSlot "blue" }}
+    slot: green
+      {{- else }}
+    slot: blue
+      {{- end}}
+    {{- else }}
+    slot: {{ $.Values.productionSlot }}
+    {{- end }}
+    release: {{ .Release.Name}}
+---
+{{- end }}
