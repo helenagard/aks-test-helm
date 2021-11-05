@@ -33,20 +33,11 @@ ingress:
   className: "nginx"
   annotations:
     kubernetes.io/ingress.class: nginx
-  # hosts:
-  rules:
-  - host:
-      epProd: claims-api-prod.cluster.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-  - host:  
-      epStage: claims-api-stage.cluster.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
+  host:
+     epProd: claims-api-prod.cluster.local
+     epStage: claims-api-stage.cluster.local
+  path: /
+  pathType: Prefix
             
  # tls: []
   #  - secretName: chart-example-tls
