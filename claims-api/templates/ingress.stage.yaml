@@ -26,7 +26,6 @@ spec:
   {{- end }}
 {{- end }}
   rules:
-    - host: {{ .Values.ingress.host.epStage }}
       http:
         paths:
           - path: {{ $ingressPath }}
