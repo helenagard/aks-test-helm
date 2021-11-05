@@ -2,9 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
+  name: {{ .Values.app.name }}-svc
   labels:
-    app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
+    app: {{ .Values.app.name }}
+    chart: {{ template "claims-api.chart" . }}
     release: {{ $.Release.Name }}
     heritage: {{ $.Release.Service }}
 spec:
@@ -15,7 +16,7 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: "{{ include "claims-api-chart.fullname" $ }}-{{ $.Values.slot }}"
+    app: {{ .Values.app.name }}-{{ $.Values.slot }}
     {{- if eq .name "stage" }}
       {{- if eq $.Values.productionSlot "blue" }}
     slot: green
