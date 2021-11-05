@@ -14,6 +14,11 @@ image:
 
 slot: blue
 productionSlot: blue
+productionTag: latest
+blue:
+  enabled: false
+green:
+  enabled: false
 
 serviceAccount:
   # Specifies whether a service account should be created
