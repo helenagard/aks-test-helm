@@ -6,8 +6,8 @@ metadata:
   name: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
   labels:
     app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+    release: {{ $.Release.Name }}
+    heritage: {{ $.Release.Service }}
 spec:
   type: {{ $.Values.service.type }}
   ports:
@@ -26,6 +26,6 @@ spec:
     {{- else }}
     slot: {{ $.Values.productionSlot }}
     {{- end }}
-    release: {{ .Release.Name}}
+    release: {{ $.Release.Name}}
 ---
 {{- end }}
