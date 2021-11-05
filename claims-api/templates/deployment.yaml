@@ -7,8 +7,8 @@ metadata:
   labels:
     app: {{ .Values.app.name }}
     slot: {{ .name }}
-    release: {{ $.Release.Name }}
-    heritage: {{ $.Release.Service }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
     {{- include "claims-api-chart.labels" $ | nindent 4 }}
 spec:
   {{- if not $.Values.autoscaling.enabled }}
@@ -26,8 +26,8 @@ spec:
       labels:
         app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
         slot: {{ .name }}
-        release: {{ $.Release.Name }}
-        heritage: {{ $.Release.Service }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
         {{- include "claims-api-chart.selectorLabels" $ | nindent 8 }}
     spec:
       {{- with $.Values.imagePullSecrets }}
