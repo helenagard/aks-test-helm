@@ -1,0 +1,78 @@
+{{- range $index, $env := .Values.deployment.envs }}
+{{- if or (and (eq .name "blue") (eq $.Values.deployment.blue.enabled true)) (and (eq .name "green") (eq $.Values.deployment.green.enabled true)) }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
+  labels:
+    app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
+    slot: {{ .name }}
+    release: {{ $.Release.Name }}
+    heritage: {{ $.Release.Service }}
+    {{- include "claims-api-chart.labels" $ | nindent 4 }}
+spec:
+  {{- if not $.Values.autoscaling.enabled }}
+  replicas: {{ $.Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "claims-api-chart.selectorLabels" $ | nindent 6 }}
+  template:
+    metadata:
+      {{- with $.Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
+        slot: {{ .name }}
+        release: {{ $.Release.Name }}
+        heritage: {{ $.Release.Service }}
+        {{- include "claims-api-chart.selectorLabels" $ | nindent 8 }}
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "claims-api-chart.serviceAccountName" $ }}
+      securityContext:
+        {{- toYaml $.Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
+          securityContext:
+            {{- toYaml $.Values.securityContext | nindent 12 }}
+          {{- if eq .name "blue" }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.deployment.blue.tag | default $.Chart.AppVersion }}"
+          {{- else }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.deployment.green.tag | default $.Chart.AppVersion }}"
+          {{- end }}
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ $.Values.deployment.livenessProbe }}
+              port: http
+          readinessProbe:
+            httpGet:
+              path: {{ $.Values.deployment.readinessProbe }}
+              port: http
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+---
+{{- end }}
+{{- end }}
