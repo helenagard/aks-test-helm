@@ -1,8 +1,9 @@
 {{- range $index, $env := .Values.service.envs }}
+$fullname := {{ .Values.app.name }}-svc
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.app.name }}-svc
+  name: {{ $fullname }}-svc
   labels:
     app: {{ .Values.app.name }}
     chart: {{ template "claims-api.chart" . }}
