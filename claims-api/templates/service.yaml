@@ -16,7 +16,7 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app:  "{{ include "emailservice-chart.fullname" $ }}-{{ $.Values.slot }}"
+    app:  "{{ include "claims-api-chart.fullname" $ }}-{{ $.Values.slot }}"
     {{- if eq .name "stage" }}
       {{- if eq $.Values.productionSlot "blue" }}
     slot: green
