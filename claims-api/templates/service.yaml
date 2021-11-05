@@ -7,8 +7,8 @@ metadata:
   labels:
     app: {{ .Values.app.name }}
     chart: {{ template "claims-api.chart" . }}
-    release: {{ $.Release.Name }}
-    heritage: {{ $.Release.Service }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
 spec:
   type: {{ $.Values.service.type }}
   ports:
@@ -27,6 +27,6 @@ spec:
     {{- else }}
     slot: {{ $.Values.productionSlot }}
     {{- end }}
-    release: {{ $.Release.Name}}
+    release: {{ .Release.Name}}
 ---
 {{- end }}
