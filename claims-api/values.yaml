@@ -69,7 +69,7 @@ ingress:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 
   hosts:
-    - host: "claims-api-test.cluster.local"
+    - host: "claims-api-prod.cluster.local"
       paths:
         - path: /
           pathType: Prefix
