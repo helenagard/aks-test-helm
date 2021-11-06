@@ -43,8 +43,8 @@ securityContext: {}
   # runAsUser: 1000
 
 deployment:
-  livenessProbe: /
-  readinessProbe: /
+  livenessProbe: /api/v1/claims/healthz
+  readinessProbe: /api/v1/claims/healthz
   blue:
     enabled: false
     tag: latest
