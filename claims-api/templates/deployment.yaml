@@ -3,9 +3,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.name }}
+  name: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
   labels:
-    app: {{ .Values.app.name }}
+    app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"
     slot: {{ .name }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -38,7 +38,7 @@ spec:
       securityContext:
         {{- toYaml $.Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Values.app.name }}
+        - name: {{ include "emailservice-chart.fullname" $ }}-{{ .name }}
           securityContext:
             {{- toYaml $.Values.securityContext | nindent 12 }}
           {{- if eq .name "blue" }}
