@@ -1,4 +1,6 @@
-{{ if .Values.blue.enabled }}
+{{- range $index, $env := .Values.deployment.envs }}
+{{- if or (and (eq .name "blue") (eq $.Values.deployment.blue.enabled true)) (and (eq .name "blue") (eq $.Values.deployment.green.enabled true)) }}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -71,4 +73,5 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
 ---
+{{- end }}
 {{- end }}
