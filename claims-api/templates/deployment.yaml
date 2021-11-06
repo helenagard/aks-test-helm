@@ -1,6 +1,3 @@
-# {{- range $index, $env := .Values.deployment.envs }}
-# {{- if or (eq .name "blue") (eq $.Values.deployment.blue.enabled true) }}
-
 {{ if .Values.blue.enabled }}
 apiVersion: apps/v1
 kind: Deployment
