@@ -4,9 +4,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"-prod
+  name: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"-blue
   labels:
-    app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"-prod
+    app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"-blue
     slot: {{ .name }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -25,9 +25,9 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"-prod
+        app: "{{ include "claims-api-chart.fullname" $ }}-{{ .name }}"-blue
         slot: {{ .name }}
-        release: {{ .Release.Name }}-prod
+        release: {{ .Release.Name }}-blue
         heritage: {{ .Release.Service }}
         {{- include "claims-api-chart.selectorLabels" $ | nindent 8 }}
     spec:
