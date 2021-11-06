@@ -40,11 +40,9 @@ spec:
         - name: {{ include "claims-api-chart.fullname" $ }}-{{ .name }}
           securityContext:
             {{- toYaml $.Values.securityContext | nindent 12 }}
-          {{- if eq .name "blue" }}
+          
           image: "{{ $.Values.image.repository }}:{{ $.Values.deployment.blue.tag | default $.Chart.AppVersion }}"
-          {{- else }}
-          image: "{{ $.Values.image.repository }}:{{ $.Values.deployment.green.tag | default $.Chart.AppVersion }}"
-          {{- end }}
+        
           imagePullPolicy: {{ $.Values.image.pullPolicy }}
           ports:
             - name: http
