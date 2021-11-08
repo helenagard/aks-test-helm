@@ -1,5 +1,5 @@
 {{- range $index, $env := .Values.deployment.envs }}
-{{- if or (and (eq .name "blue") (eq $.Values.deployment.blue.enabled true)) (and (eq .name "blue") (eq $.Values.deployment.green.enabled true)) }}
+{{- if or (and (eq .name "blue") (eq $.Values.deployment.blue.enabled true)) (and (eq .name "green") (eq $.Values.deployment.green.enabled true)) }}
 
 apiVersion: apps/v1
 kind: Deployment
