@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: {{ include "claims-api-chart.fullname" $ }}-{{ .name }}   
-          image: "{{ $.Values.image.repository }}:{{ $.Values.deployment.$newslot.tag | default $.Chart.AppVersion }}"
+          image: "{{ $.Values.image.repository }}:{{ $.Values.deployment."($newslot)".tag | default $.Chart.AppVersion }}"
           ports:
             - name: http
               containerPort: 80
