@@ -56,7 +56,7 @@ deployment:
   - name: green
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
   envs:
   - name: stage
