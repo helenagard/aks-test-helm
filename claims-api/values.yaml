@@ -69,12 +69,12 @@ ingress:
   hosts:
     - host: "claims-api-prod.cluster.local"
       paths:
-        - path: /
+        - path: /prod
           pathType: Prefix
           env: prod
     - host: "claims-api-stage.cluster.local"
       paths:
-        - path: /
+        - path: /stage
           pathType: Prefix
           env: stage
   tls: []
